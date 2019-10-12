@@ -1,0 +1,19 @@
+1
+00:00:01,220 --> 00:00:01,230
+{"hi":"yes"}
+
+2
+00:00:27,220 --> 00:00:27,230
+{"id":46,"type":"HOLOGRAM","name":"DRAGON_EYE","command":"Play"}
+
+3
+00:01:00,220 --> 00:01:00,230
+{"id":47,"type":"HOLOGRAM","name":"DRAGON_FULL","command":"Play"}
+
+4
+00:02:23,220 --> 00:02:23,230
+{"id":48,"type":"HOLOGRAM","name":"OMINOUS_OCULI_SWARM","command":"Play"}
+
+5
+00:03:38,220 --> 00:03:38,230
+{"id":37,"type":"HOLOGRAM","name":"WAITING","command":"Play"}

@@ -1,0 +1,15 @@
+1
+00:00:01,220 --> 00:00:01,230
+{"hi":"yes"}
+
+2
+00:00:02,220 --> 00:00:02,230
+{"id":58,"type":"HOLOGRAM","name":"JESTER_CLOWNING","command":"Play"}
+
+3
+00:01:33,220 --> 00:01:33,230
+{"id":57,"type":"HOLOGRAM","name":"JESTER_BALLOON","command":"Play"}
+
+4
+00:02:40,220 --> 00:02:40,230
+{"id":37,"type":"HOLOGRAM","name":"WAITING","command":"Play"}

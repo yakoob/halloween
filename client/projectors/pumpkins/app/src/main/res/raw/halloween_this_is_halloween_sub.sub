@@ -1,0 +1,23 @@
+1
+00:00:01,220 --> 00:00:01,230
+{"hi":"yes"}
+
+2
+00:00:25,220 --> 00:00:25,230
+{"id":54,"type":"HOLOGRAM","name":"SPECTRAL_SCARE2","command":"Play"}
+
+3
+00:00:29,220 --> 00:00:29,230
+{"id":54,"type":"HOLOGRAM","name":"SAM_SCARE2","command":"Play"}
+
+4
+00:00:35,220 --> 00:00:35,230
+{"id":54,"type":"HOLOGRAM","name":"SAM_SCARE3","command":"Play"}
+
+5
+00:01:10,220 --> 00:01:10,230
+{"id":54,"type":"HOLOGRAM","name":"SAM_NOCOSTUME","command":"Play"}
+
+6
+00:02:10,220 --> 00:02:10,230
+{"id":54,"type":"HOLOGRAM","name":"JESTER_SCARES","command":"Play"}
