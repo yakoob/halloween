@@ -1,0 +1,13 @@
+import koob.domain.visualization.HueEffect
+
+model {
+    HueEffect obj
+}
+
+json {
+    on obj.on
+    bri obj.bri
+    sat obj.sat
+    hue obj.hue
+}
+

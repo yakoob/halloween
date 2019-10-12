@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/.gradle/caches/modules-2/files-2.1/org.eclipse.paho/org.eclipse.paho.android.service/1.0.2/2d956522c556caeb35148445ecd059ebe67331f6/org.eclipse.paho.android.service-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="2d956522c556caeb35148445ecd059ebe67331f6">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/org.eclipse.paho.android.service-1.0.2_0f057cf7766cac5f879235f8ab13f67654e1ddd3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_0a6281ba976db40906dab691759a1bd919185a58.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/gson-2.7_fe256a918c84af244f502e33c19013332396feaf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_3929e96b6f687725e22f601f01d5425e92dc4bf9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_dd970d07145d5cd7b337bbce1524e38a4ca7b4c6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_79191cd1cb7ca747e5f8dd0ce9b5ce3277bb9225.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_daaa3d5353e6af05169fe6b853b62d5d8a62d53a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_0ca22adc76ab3328d390ae65b9a18a84d3880a87.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yakoobahmad/.gradle/caches/modules-2/files-2.1/org.eclipse.paho/org.eclipse.paho.client.mqttv3/1.0.2/11752d3f24d1a9deda4533a7ca18d8496417ceeb/org.eclipse.paho.client.mqttv3-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="11752d3f24d1a9deda4533a7ca18d8496417ceeb">
+        <dex dex="/Users/yakoobahmad/Documents/GitHub/IoT/mobile/android/com.yakoobahmad.halloween/hologram/app/build/intermediates/pre-dexed/debug/org.eclipse.paho.client.mqttv3-1.0.2_251aa6d04a056e8d75889fc271b98ade0390104b.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,12 @@
+import koob.media.ChristmasVideo
+
+model {
+    ChristmasVideo obj
+}
+
+json {
+    id obj.id
+    name obj.name
+    command obj.command
+}
+

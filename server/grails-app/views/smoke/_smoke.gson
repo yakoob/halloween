@@ -1,0 +1,13 @@
+import koob.device.Smoke
+
+model {
+    Smoke obj
+}
+
+json {
+    id obj.id
+    name obj.name
+    state obj.state
+    position obj.position
+}
+
