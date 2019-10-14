@@ -12,11 +12,9 @@ import koob.event.SoundDetectionCalculationComplete
 import koob.fsm.FSM
 import koob.fsm.state.Off
 import koob.fsm.state.On
-import koob.http.LightingClient
 import koob.visualization.Color
 import koob.visualization.ColorHue
 import grails.util.Holders
-import org.springframework.beans.factory.annotation.Autowired
 
 @Log
 class Light extends BaseActor implements FSM {

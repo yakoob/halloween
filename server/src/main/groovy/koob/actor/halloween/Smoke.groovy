@@ -2,8 +2,8 @@ package koob.actor.halloween
 
 import akka.actor.ActorRef
 import koob.command.Command
-import koob.command.halloween.BlowSmoke
-import koob.command.halloween.StopSmoke
+import koob.command.device.SmokeOn
+import koob.command.device.SmokeOff
 import koob.fsm.Guard
 import koob.fsm.state.Any
 import koob.fsm.state.Off
@@ -39,11 +39,11 @@ class Smoke extends koob.actor.device.Smoke {
 
         super.configureFsmDsl()
 
-        fsm.record().onCommands([StopSmoke]).fromState(Any).goToState(Off).transition = { Command command ->
+        fsm.record().onCommands([SmokeOff]).fromState(Any).goToState(Off).transition = { Command command ->
             toggleSmokeMachine(new Off())
         }
 
-        fsm.record().onCommands([BlowSmoke]).fromState(Off).goToState(On).transition = { Command command ->
+        fsm.record().onCommands([SmokeOn]).fromState(Off).goToState(On).transition = { Command command ->
 
             log.info "blow smoke"
 
@@ -62,7 +62,7 @@ class Smoke extends koob.actor.device.Smoke {
                 new Runnable() {
                     @Override
                     public void run() {
-                        self.tell(StopSmoke.newInstance(), ActorRef.noSender())
+                        self.tell(new SmokeOff(), ActorRef.noSender())
                     }
                 }, context.system().dispatcher()
             )
