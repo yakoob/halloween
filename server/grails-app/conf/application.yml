@@ -147,15 +147,15 @@ mode:
 mqtt:
     client:
         connectOnStartUp: true
-        ip: 192.168.20.114
+        ip: mqtt_broker_ip_address_here
         port: 1883
 
 ---
 hue:
     enable: true
-    apiSecret: l2MttOUGerFnPBPen4aQ38LwOXvoJOm8Gq6O30ar
+    apiSecret: hue_api_key_here
 
 ---
 smoke:
     enable: false
-    uri: 192.168.20.217/arduino/
+    uri: arduino_ip_address_here/arduino/
