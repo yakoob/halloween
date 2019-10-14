@@ -1,6 +1,9 @@
 package koob.actor.halloween
 
 import akka.actor.ActorRef
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.client.FullNettyClientHttpResponse
+import io.reactivex.Flowable
 import koob.command.Command
 import koob.command.halloween.BlowSmoke
 import koob.command.halloween.StopSmoke
@@ -56,7 +59,7 @@ class Smoke extends koob.actor.device.Smoke {
             toggleSmokeMachine(new On())
 
             /**
-             * turn smoke off after 2 secons
+             * turn smoke off after 2 seconds
              */
             context.system().scheduler().scheduleOnce(Duration.create(3, TimeUnit.SECONDS),
                 new Runnable() {
@@ -77,14 +80,27 @@ class Smoke extends koob.actor.device.Smoke {
             koob.device.Smoke.withNewSession {
                 if (state instanceof On) {
                     println "tell smoke machine client on()"
-                    smokeService.client.on()
+                    smokeClientCallBack(smokeService.client.on())
                 }
                 if (state instanceof Off) {
                     println "tell smoke machine client off()"
-                    smokeService.client.off()
+                    smokeClientCallBack(smokeService.client.off())
                 }
             }
         }
+    }
+
+    void smokeClientCallBack(Flowable<HttpResponse<String>> httpResponse) {
+
+        httpResponse.subscribe({ FullNettyClientHttpResponse it ->
+            println it.body?.get()
+            println ' === !!!smokeClientCallBack Success: httpCallBackResult fully populated !!! ==='
+        }, { exception ->
+            println 'smokeClientCallBack httpResponse.onError : Consumer error (async listener): ' + exception.toString()
+            exception.printStackTrace()
+        }, { it ->
+            println "smokeClientCallBack Success httpResponse.onComplete >> Consumer completed"
+        })
     }
 
 }

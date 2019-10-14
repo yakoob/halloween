@@ -189,23 +189,15 @@ class Light extends BaseActor implements FSM {
     }
 
     void lightClientCallback(Flowable<HttpResponse<String>> httpResponse) {
-
         httpResponse.subscribe({ FullNettyClientHttpResponse it ->
-
             println it.body?.get()
-
             println ' === !!!lightClientCallback Success: httpCallBackResult fully populated !!! ==='
-
-
         }, { exception ->
             println 'lightClientCallback httpResponse.onError : Consumer error (async listener): ' + exception.toString()
             exception.printStackTrace()
-            // todo: send delivery report
         }, { it ->
             println "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
-            // todo: send delivery report
-        }
-        )
+        })
     }
 
     public enum BrightnessCatagory {
