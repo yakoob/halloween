@@ -184,7 +184,8 @@ class Light extends BaseActor implements FSM {
     }
 
     void send(String node, HueEffect hueEffect){
-        lightClientCallback(lightingService.client.setState(Holders.config.hue.user, node, jsonService.toJsonFromDomainTemplate(hueEffect)))
+        if (Holders.config.hue.enable)
+            lightClientCallback(lightingService.client.setState(Holders.config.hue.user, node, jsonService.toJsonFromDomainTemplate(hueEffect)))
     }
 
     void lightClientCallback(Flowable<HttpResponse<String>> httpResponse) {

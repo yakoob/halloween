@@ -73,7 +73,7 @@ class Smoke extends koob.actor.device.Smoke {
     }
 
     private void toggleSmokeMachine(State state){
-        if (Holders.config.smoke) {
+        if (Holders.config.smoke.enable) {
             koob.device.Smoke.withNewSession {
                 if (state instanceof On) {
                     println "tell smoke machine client on()"

@@ -11,7 +11,7 @@ interface LightingOperations {
     Flowable<HttpResponse<String>> setState(String user, String node, String json)
 }
 
-@Client("http://192.168.20.153/api/")
+@Client("{Holders.config.hue.api}")
 interface LightingClient extends LightingOperations {
     @Override
     @Put(uri="/{user}/lights/{node}/state", processes = "application/json")
@@ -22,7 +22,7 @@ interface LightingClient extends LightingOperations {
     )
 }
 
-@Client("http://192.168.20.217/arduino/")
+@Client("{Holders.config.smoke.api}")
 interface SmokeClient {
 
     @Get(uri="/servo/5/60", processes = "application/json")

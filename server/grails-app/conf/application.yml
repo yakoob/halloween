@@ -152,7 +152,11 @@ mqtt:
 
 ---
 hue:
+    enable: true
+    api: http://192.168.20.153/api/
     user: l2MttOUGerFnPBPen4aQ38LwOXvoJOm8Gq6O30ar
 
 ---
-smoke: false
+smoke:
+    enable: false
+    api: http://192.168.20.217/arduino/
