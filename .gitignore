@@ -1,3 +1,5 @@
 
 .DS_Store
 .gitattributes
+client/projectors/hologram/app/src/.DS_Store
+client/projectors/hologram/app/src/main/res/.DS_Store
