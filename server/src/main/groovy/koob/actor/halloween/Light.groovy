@@ -2,9 +2,6 @@ package koob.actor.halloween
 
 import akka.actor.ActorRef
 import groovy.util.logging.Log
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.client.FullNettyClientHttpResponse
-import io.reactivex.Flowable
 import koob.actor.BaseActor
 import koob.command.Command
 import koob.command.TurnOff
@@ -24,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired
 @Log
 class Light extends BaseActor implements FSM {
 
-    def jsonService = Holders.applicationContext.getBean("jsonService")
     def lightingService = Holders.applicationContext.getBean("lightingService")
 
     Hue light

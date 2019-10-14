@@ -1,9 +1,6 @@
 package koob.actor.halloween
 
 import akka.actor.ActorRef
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.client.FullNettyClientHttpResponse
-import io.reactivex.Flowable
 import koob.command.Command
 import koob.command.halloween.BlowSmoke
 import koob.command.halloween.StopSmoke
