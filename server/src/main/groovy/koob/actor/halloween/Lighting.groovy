@@ -20,10 +20,6 @@ class Lighting extends BaseActor {
             def _huePortable = Hue.portable
             huePortable = context.system().actorOf(Props.create(Light.class, _huePortable), _huePortable.description)
 
-            /*
-            def p1 = Hue.findByDescription("Pumpkin_left")
-            pumpkin1 = context.system().actorOf(Props.create(Light.class, p1), p1.description)
-             */
         }
 
     }
@@ -38,10 +34,6 @@ class Lighting extends BaseActor {
             // println "lighting : SoundDetectionCalculationComplete: " + message.dump()
 
             huePortable?.tell(message, self)
-
-
-            // light2?.tell(message, self)
-
 
         }
 

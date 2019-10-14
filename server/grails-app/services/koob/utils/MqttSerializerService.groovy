@@ -31,7 +31,7 @@ class MqttSerializerService {
 
         if (topic.contains("Aurduino/HomeAutomation.Audio/102/event")){
             def JsonObject = JSON.parse(message)
-            def res = SoundDetected.newInstance()
+            def res = new SoundDetected()
             res.level = JsonObject.Value
             return res
         }

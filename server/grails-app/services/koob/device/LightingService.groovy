@@ -18,8 +18,12 @@ class LightingService {
     JsonService jsonService
 
     void setState(String node, HueEffect hueEffect){
-        if (Holders.config.hue.enable)
-            httpCallback(lightingClient.setState(Holders.config.hue.user, node, jsonService.toJsonFromDomainTemplate(hueEffect)))
+        if (Holders.config.hue.enable) {
+            println 'http://' + Holders.config.hue.uri + '/' + node
+            println 'body: ' + jsonService.toJsonFromDomainTemplate(hueEffect)
+            httpCallback(lightingClient.setState(Holders.config.hue.apiSecret, node, jsonService.toJsonFromDomainTemplate(hueEffect)))
+        }
+
     }
 
     void httpCallback(Flowable<HttpResponse<String>> httpResponse) {
@@ -32,6 +36,10 @@ class LightingService {
         }, { it ->
             println "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
         })
+
+        httpResponse.doOnError{
+            it.printStackTrace()
+        }
     }
 
 

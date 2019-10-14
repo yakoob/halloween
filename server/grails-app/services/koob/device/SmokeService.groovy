@@ -14,12 +14,12 @@ class SmokeService {
 
     void on(){
         if (Holders.config.smoke.enable)
-            smokeClientCallBack(smokeClient.on())
+            smokeClientCallBack(smokeClient.on(Holders.config.smoke.uri))
     }
 
     void off(){
         if (Holders.config.smoke.enable)
-            smokeClientCallBack(smokeClient.off())
+            smokeClientCallBack(smokeClient.off(Holders.config.smoke.uri))
     }
 
     void smokeClientCallBack(Flowable<HttpResponse<String>> httpResponse) {
