@@ -30,8 +30,6 @@ class Light extends BaseActor implements FSM {
     Hue light
 
     List<Color> colorList = []
-    def httpClientService
-    // def httpClientService = Holders.applicationContext.getBean("httpClientService")
 
     Light(Hue hue) {
 
