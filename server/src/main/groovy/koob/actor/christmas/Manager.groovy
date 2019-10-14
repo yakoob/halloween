@@ -12,7 +12,7 @@ class Manager extends BaseActor {
     private ActorRef projector = null
 
     Manager() {
-        println "setup christmas projector"
+        log.info "setup christmas projector"
         projector = context.system().actorOf(Props.create(Projector.class), "ChristmasProjector")
     }
 

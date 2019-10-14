@@ -16,7 +16,7 @@ class BaseActor  extends UntypedActor {
 
     // this is until I figure out how to get a logger attached to Runnable interface
     public void loggingProxy(l){
-        println(l.toString())
+        log.info(l.toString())
     }
 
 }

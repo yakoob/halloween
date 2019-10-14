@@ -45,7 +45,7 @@ class ProjectorPumpkins extends BaseActor implements FSM {
 
     ProjectorPumpkins(){
 
-        println "Projector initialized with : " + self?.path()?.name()
+        log.info "Projector initialized with : " + self?.path()?.name()
 
         startStateMachine(Off)
 
@@ -58,7 +58,7 @@ class ProjectorPumpkins extends BaseActor implements FSM {
     @Override
     void onReceive(Object message) throws Exception {
 
-        println "projectorPumpkins $message"
+        log.info "projectorPumpkins $message"
 
         if (message instanceof Command)
 
@@ -72,7 +72,7 @@ class ProjectorPumpkins extends BaseActor implements FSM {
 
                 if ( message instanceof MediaPlaybackComplete ){
 
-                    println "self.tell(new Random(), self)"
+                    log.info "self.tell(new Random(), self)"
                     self.tell(new Random(), self)
 
                 } else if (message instanceof PumpkinsPlaybackStarted) {
@@ -84,7 +84,7 @@ class ProjectorPumpkins extends BaseActor implements FSM {
 
         }
         else
-            println "ProjectorPumpkins.onReceive not handled for message: ${message.toString()}"
+            log.info "ProjectorPumpkins.onReceive not handled for message: ${message.toString()}"
 
     }
 
@@ -121,7 +121,7 @@ class ProjectorPumpkins extends BaseActor implements FSM {
         }
 
         fsm.record().onCommands([Random]).fromState(Any).goToState(Loading).transition = { Command command ->
-            println "Projector Pumpkins >> fsm.record().onCommands([Random])"
+            log.info "Projector Pumpkins >> fsm.record().onCommands([Random])"
             playRandomVideo()
         }
 

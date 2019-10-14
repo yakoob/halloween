@@ -18,29 +18,20 @@ class LightingService {
     JsonService jsonService
 
     void setState(String node, HueEffect hueEffect){
-        if (Holders.config.hue.enable) {
-            println 'http://' + Holders.config.hue.uri + '/' + node
-            println 'body: ' + jsonService.toJsonFromDomainTemplate(hueEffect)
+        if (Holders.config.hue.enable)
             httpCallback(lightingClient.setState(Holders.config.hue.apiSecret, node, jsonService.toJsonFromDomainTemplate(hueEffect)))
-        }
-
     }
 
     void httpCallback(Flowable<HttpResponse<String>> httpResponse) {
         httpResponse.subscribe({ FullNettyClientHttpResponse it ->
-            println it.body?.get()
-            println ' === !!!lightClientCallback Success: httpCallBackResult fully populated !!! ==='
+            log.info it.body?.get()
+            log.info ' === !!!lightClientCallback Success: httpCallBackResult fully populated !!! ==='
         }, { exception ->
-            println 'lightClientCallback httpResponse.onError : Consumer error (async listener): ' + exception.toString()
+            log.info 'lightClientCallback httpResponse.onError : Consumer error (async listener): ' + exception.toString()
             exception.printStackTrace()
         }, { it ->
-            println "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
+            log.info "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
         })
-
-        httpResponse.doOnError{
-            it.printStackTrace()
-        }
     }
-
 
 }

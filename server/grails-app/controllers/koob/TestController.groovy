@@ -16,10 +16,10 @@ class TestController {
 
     def play(){
         String name = params.video
-        println "controller play() $name"
+        log.info "controller play() $name"
 
         HalloweenVideo v = HalloweenVideo.findByName(HalloweenVideo.Name.valueOf(name.toUpperCase()))
-        println "controller video: $v"
+        log.info "controller video: $v"
         if (v.hologram)
             HalloweenManager.tellProjectorHolograms(new Play(media: v))
         else if (v.pumpkin)

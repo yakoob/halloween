@@ -21,7 +21,7 @@ class Smoke extends koob.actor.device.Smoke {
     def smokeService = Holders.applicationContext.getBean("smokeService")
 
     public Smoke() {
-        println "Smoke actor initialized"
+        log.info "Smoke actor initialized"
         startStateMachine(Off)
         configureFsmDsl()
     }
@@ -76,11 +76,11 @@ class Smoke extends koob.actor.device.Smoke {
 
         koob.device.Smoke.withNewSession {
             if (state instanceof On) {
-                println "tell smoke machine client on()"
+                log.info "tell smoke machine client on()"
                 smokeService.on()
             }
             if (state instanceof Off) {
-                println "tell smoke machine client off()"
+                log.info "tell smoke machine client off()"
                 smokeService.off()
             }
         }

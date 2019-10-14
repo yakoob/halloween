@@ -25,10 +25,10 @@ class HalloweenManager extends BaseActor implements GlobalConfig {
             projectorPumpkins = context.system().actorOf(Props.create(ProjectorPumpkins.class), "ProjectorPumpkins")
             projectorHologram = context.system().actorOf(Props.create(ProjectorHologram.class), "ProjectorHologram")
 
-            println "Halloween manager started"
+            log.info "Halloween manager started"
 
         } else {
-            println "CAN NOT START - halloween not enabled"
+            log.info "CAN NOT START - halloween not enabled"
         }
 
     }

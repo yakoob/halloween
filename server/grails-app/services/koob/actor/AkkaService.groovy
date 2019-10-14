@@ -76,10 +76,10 @@ class AkkaService implements GlobalConfig {
 
         if (halloweenEnabled){
 
-            println "about to create halloweenManager"
+            log.info "about to create halloweenManager"
             halloweenManager = actorOf(HalloweenManager, "HalloweenManager")
 
-            println "about to create sound detection"
+            log.info "about to create sound detection"
             soundDetection = actorOf(SoundDetection, "SoundDetection")
             // twitter = actorOf(koob.koob.actor.social.Twitter, "Twitter")
 

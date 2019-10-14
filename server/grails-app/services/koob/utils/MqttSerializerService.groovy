@@ -40,10 +40,10 @@ class MqttSerializerService {
 
             json = JSON.parse(message)
 
-            println " "
-            println 'MQTT serializer pumpkins'
-            println json.toString()
-            println " "
+            log.info " "
+            log.info 'MQTT serializer pumpkins'
+            log.info json.toString()
+            log.info " "
 
             HalloweenVideo _media = new Gson().fromJson(message, HalloweenVideo.class)
             def res
@@ -65,10 +65,10 @@ class MqttSerializerService {
 
             json = JSON.parse(message)
 
-            println " "
-            println 'mqqt serializer hologram'
-            println json.toString()
-            println " "
+            log.info " "
+            log.info 'mqqt serializer hologram'
+            log.info json.toString()
+            log.info " "
 
             HalloweenVideo _media = new Gson().fromJson(message, HalloweenVideo.class)
 
@@ -127,8 +127,8 @@ class MqttSerializerService {
         }
 
         if (topic.contains("ActorSystem/Christmas/Projector/Event")){
-            println "!!! todo: !!!! implement christmas projector events"
-            println message
+            log.info "!!! todo: !!!! implement christmas projector events"
+            log.info message
             return
         }
     }

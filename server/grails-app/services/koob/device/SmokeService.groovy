@@ -25,13 +25,13 @@ class SmokeService {
     void smokeClientCallBack(Flowable<HttpResponse<String>> httpResponse) {
 
         httpResponse.subscribe({ FullNettyClientHttpResponse it ->
-            println it.body?.get()
-            println ' === !!!smokeClientCallBack Success: httpCallBackResult fully populated !!! ==='
+            log.info it.body?.get()
+            log.info ' === !!!smokeClientCallBack Success: httpCallBackResult fully populated !!! ==='
         }, { exception ->
-            println 'smokeClientCallBack httpResponse.onError : Consumer error (async listener): ' + exception.toString()
+            log.info 'smokeClientCallBack httpResponse.onError : Consumer error (async listener): ' + exception.toString()
             exception.printStackTrace()
         }, { it ->
-            println "smokeClientCallBack Success httpResponse.onComplete >> Consumer completed"
+            log.info "smokeClientCallBack Success httpResponse.onComplete >> Consumer completed"
         })
     }
 }

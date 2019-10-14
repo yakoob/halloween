@@ -72,7 +72,7 @@ class ProjectorHologram extends BaseActor implements FSM {
 
         }
         else
-            println "ProjectorHologram.onReceive not handled for message: ${message.toString()}"
+            log.info "ProjectorHologram.onReceive not handled for message: ${message.toString()}"
 
     }
 
@@ -97,7 +97,7 @@ class ProjectorHologram extends BaseActor implements FSM {
             if (! playlistQueue.contains(selectedVideo) )
                 playlistQueue.add(selectedVideo)
 
-            println 'playlistQueue : ' + playlistQueue.toListString()
+            log.info 'playlistQueue : ' + playlistQueue.toListString()
 
             log.info "selectedVideo is ${selectedVideo.name}"
 
@@ -129,7 +129,7 @@ class ProjectorHologram extends BaseActor implements FSM {
         }
 
         fsm.record().onCommands([Random]).fromState(Any).goToState(Loading).transition = { Command command ->
-            println "Projector Hologram >> fsm.record().onCommands([Random])"
+            log.info "Projector Hologram >> fsm.record().onCommands([Random])"
             if ( canPlay() )
                 playRandomVideo()
         }

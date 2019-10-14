@@ -17,31 +17,18 @@ class BootStrap implements GlobalConfig {
     def init = { servletContext ->
         configureModels()
         akkaService.init()
-
         mqttBrokerService.start()
-
         mqttClientService.init()
-
-
     }
 
     def destroy = {
-        mqttBrokerService.stop()
+        akkaService?.destroy()
+        mqttBrokerService?.stop()
     }
 
     private void configureModels(){
-        HalloweenVideo.withNewSession {
-            configureDataHalloween()
-        }
-
-        // configureDataChristmas()
-
-        /*
-        Video.list() {
-            println it.class.simpleName + " | " + it.name
-        }
-        */
-
+        HalloweenVideo.withNewSession { configureDataHalloween() }
+        // ChristmasVideo.withNewSession { configureDataChristmas() }
     }
 
     private void configureDataHalloween(){
