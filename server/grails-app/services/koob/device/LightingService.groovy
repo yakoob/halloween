@@ -24,13 +24,13 @@ class LightingService {
 
     void httpCallback(Flowable<HttpResponse<String>> httpResponse) {
         httpResponse.subscribe({ FullNettyClientHttpResponse it ->
-            log.info it.body?.get()
-            log.info ' === !!!lightClientCallback Success: httpCallBackResult fully populated !!! ==='
+            log.debug it.body?.get()
+            log.debug ' === !!!lightClientCallback Success: httpCallBackResult fully populated !!! ==='
         }, { exception ->
-            log.info 'lightClientCallback httpResponse.onError : Consumer error (async listener): ' + exception.toString()
+            log.debug 'lightClientCallback httpResponse.onError : Consumer error (async listener): ' + exception.toString()
             exception.printStackTrace()
         }, { it ->
-            log.info "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
+            log.debug "lightClientCallback Success httpResponse.onComplete >> Consumer completed"
         })
     }
 

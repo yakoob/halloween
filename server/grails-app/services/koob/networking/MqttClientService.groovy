@@ -71,7 +71,7 @@ class MqttClientService implements MqttCallback {
     public void messageArrived(String topic, MqttMessage m) {
         try {
 
-            log.info "MqttClient.messageArrived >> topic:$topic | message:${m.toString()}"
+            log.debug "MqttClient.messageArrived >> topic:$topic | message:${m.toString()}"
 
             def message = mqttSerializerService.serialize(topic, m?.toString())
 
@@ -125,7 +125,7 @@ class MqttClientService implements MqttCallback {
     }
 
     def publish(String topic, String payload){
-        log.info ">>> publish topic: $topic | payload: $payload"
+        log.debug ">>> publish topic: $topic | payload: $payload"
 
         if (mqttClient) {
             MqttMessage message=new MqttMessage()

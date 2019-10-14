@@ -56,6 +56,8 @@ class ProjectorHologram extends BaseActor implements FSM {
     @Override
     void onReceive(Object message) throws Exception {
 
+        log.info "ProjectorHologram $message"
+
         if (message instanceof Command)
 
             fsm.fire(message)

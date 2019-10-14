@@ -36,8 +36,8 @@ class MqttBrokerService {
         @Override
         public void onPublish(InterceptPublishMessage msg) {
             String message = msg.getPayload().toString(UTF_8)
-            log.info " "
-            log.info ("MqttBroker.onPublish >> topic: " + msg.getTopicName() + " content: $message")
+            log.debug " "
+            log.debug ("MqttBroker.onPublish >> topic: " + msg.getTopicName() + " content: $message")
         }
     }
 

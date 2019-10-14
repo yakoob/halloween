@@ -2,6 +2,7 @@ package koob.actor.device
 
 import akka.actor.ActorRef
 import groovy.util.logging.Log
+import groovy.util.logging.Slf4j
 import koob.actor.BaseActor
 import koob.actor.halloween.HalloweenManager
 import koob.event.SoundDetected
@@ -11,7 +12,7 @@ import scala.concurrent.duration.Duration
 
 import java.util.concurrent.TimeUnit
 
-@Log
+@Slf4j
 class SoundDetection extends BaseActor {
 
     private soundDetections = []
@@ -58,9 +59,9 @@ class SoundDetection extends BaseActor {
             if (soundDetections?.size()>=detectionBufferSize+1) {
                 sum = soundDetections?.sum()
                 avg = (soundDetections?.sum()/detectionBufferSize)
-                log.info "==================================================="
-                log.info "Sound(sum: $sum | avg: $avg)"
-                log.info "==================================================="
+                log.debug "==================================================="
+                log.debug "Sound(sum: $sum | avg: $avg)"
+                log.debug "==================================================="
                 soundDetections.clear()
                 soundDetectionsLastSum = sum
 
