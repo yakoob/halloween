@@ -18,9 +18,10 @@ import java.util.concurrent.TimeUnit
 @Slf4j
 class Smoke extends koob.actor.device.Smoke {
 
-    def httpClientService = Holders.applicationContext.getBean("httpClientService")
+    def smokeService = Holders.applicationContext.getBean("smokeService")
 
     public Smoke() {
+        println "Smoke actor initialized"
         startStateMachine(Off)
         configureFsmDsl()
     }
@@ -72,30 +73,18 @@ class Smoke extends koob.actor.device.Smoke {
     }
 
     private void toggleSmokeMachine(State state){
-
-        koob.device.Smoke.withNewSession {
-
-            if (state instanceof On)
-                httpClientService.get("http://192.168.20.217/arduino/servo/5/60")
-            if (state instanceof Off)
-                httpClientService.get("http://192.168.20.217/arduino/servo/5/90")
-
-            /*
-            def smoke = koob.device.Smoke.findByNameAndState(
-                koob.device.Smoke.Name.HALLOWEEN_REAR,
-                koob.device.Smoke.getSmokeState(state)
-            )
-
-            if (smoke?.jsonTemplatePath) {
-                // send to mqtt so arduino can process
-                mqttClientService.publish(
-                        "/halloween/smoke",
-                        jsonService.toJsonFromDomainTemplate(smoke)
-                )
+        if (Holders.config.smoke) {
+            koob.device.Smoke.withNewSession {
+                if (state instanceof On) {
+                    println "tell smoke machine client on()"
+                    smokeService.client.on()
+                }
+                if (state instanceof Off) {
+                    println "tell smoke machine client off()"
+                    smokeService.client.off()
+                }
             }
-            */
-
         }
-
     }
+
 }

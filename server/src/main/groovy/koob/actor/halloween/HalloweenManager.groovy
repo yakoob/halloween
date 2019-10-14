@@ -10,22 +10,21 @@ import groovy.util.logging.Log
 @Log
 class HalloweenManager extends BaseActor implements GlobalConfig {
 
-    def akkaService = Holders.applicationContext.getBean("akkaService")
+    private static ActorRef lighting = null
+    private static ActorRef smoke = null
 
     private static ActorRef projectorPumpkins = null
     private static ActorRef projectorHologram = null
 
-    private static ActorRef lighting = null
-
     HalloweenManager() {
 
         if (halloweenEnabled){
-            // smokeMachine = context.system().actorOf(Props.create(koob.koob.actor.halloween.Smoke.class), "SmokeMachine")
+            smoke = context.system().actorOf(Props.create(Smoke.class), "SmokeMachine")
+            lighting = context.system().actorOf(Props.create(Lighting.class), "Lighting")
+
             projectorPumpkins = context.system().actorOf(Props.create(ProjectorPumpkins.class), "ProjectorPumpkins")
             projectorHologram = context.system().actorOf(Props.create(ProjectorHologram.class), "ProjectorHologram")
 
-            // projectorSam = context.system().actorOf(Props.create(Projector2.class), "ProjectorSam")
-            lighting = context.system().actorOf(Props.create(Lighting.class), "Lighting")
             println "Halloween manager started"
 
         } else {
@@ -40,13 +39,18 @@ class HalloweenManager extends BaseActor implements GlobalConfig {
     }
 
     static void tell(message, actor = ActorRef.noSender()){
+        lighting.tell(message, actor)
+        smoke.tell(message, actor)
         projectorPumpkins.tell(message, actor)
         projectorHologram.tell(message, actor)
-        lighting.tell(message, actor)
     }
 
     static void tellLighting(message, actor = ActorRef.noSender()){
         lighting.tell(message, actor)
+    }
+
+    static void tellSmoke(message, actor = ActorRef.noSender()){
+        smoke.tell(message, actor)
     }
 
     static void tellProjectors(message, actor = ActorRef.noSender()){

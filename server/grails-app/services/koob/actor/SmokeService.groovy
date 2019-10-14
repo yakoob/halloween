@@ -1,14 +1,14 @@
 package koob.actor
 
-import koob.http.LightingClient
+import koob.http.SmokeClient
 import org.springframework.beans.factory.annotation.Autowired
 
-class LightingService {
+class SmokeService {
 
     @Autowired
-    LightingClient lightingClient
+    SmokeClient smokeClient
 
     def getClient() {
-        return lightingClient
+        return smokeClient
     }
 }

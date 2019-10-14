@@ -66,7 +66,7 @@ class HalloweenVideo implements JsonSerializable, Media {
         event nullable: true
         id bindable: true
     }
-
+    
     boolean isWaiting(){
         name == Name.WAITING
     }

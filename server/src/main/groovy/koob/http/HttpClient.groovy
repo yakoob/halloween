@@ -1,8 +1,8 @@
 package koob.http
 
-import grails.util.Holders
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
+import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Put
 import io.micronaut.http.client.annotation.Client
 import io.reactivex.Flowable
@@ -22,6 +22,15 @@ interface LightingClient extends LightingOperations {
     )
 }
 
+@Client("http://192.168.20.217/arduino/")
+interface SmokeClient {
 
+    @Get(uri="/servo/5/60", processes = "application/json")
+    Flowable<HttpResponse<String>> on()
+
+    @Get(uri="/servo/5/90", processes = "application/json")
+    Flowable<HttpResponse<String>> off()
+
+}
 
 

@@ -153,3 +153,6 @@ mqtt:
 ---
 hue:
     user: l2MttOUGerFnPBPen4aQ38LwOXvoJOm8Gq6O30ar
+
+---
+smoke: false
