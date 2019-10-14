@@ -76,31 +76,20 @@ class Smoke extends koob.actor.device.Smoke {
     }
 
     private void toggleSmokeMachine(State state){
-        if (Holders.config.smoke.enable) {
-            koob.device.Smoke.withNewSession {
-                if (state instanceof On) {
-                    println "tell smoke machine client on()"
-                    smokeClientCallBack(smokeService.client.on())
-                }
-                if (state instanceof Off) {
-                    println "tell smoke machine client off()"
-                    smokeClientCallBack(smokeService.client.off())
-                }
+
+        koob.device.Smoke.withNewSession {
+            if (state instanceof On) {
+                println "tell smoke machine client on()"
+                smokeService.on()
+            }
+            if (state instanceof Off) {
+                println "tell smoke machine client off()"
+                smokeService.off()
             }
         }
+
     }
 
-    void smokeClientCallBack(Flowable<HttpResponse<String>> httpResponse) {
 
-        httpResponse.subscribe({ FullNettyClientHttpResponse it ->
-            println it.body?.get()
-            println ' === !!!smokeClientCallBack Success: httpCallBackResult fully populated !!! ==='
-        }, { exception ->
-            println 'smokeClientCallBack httpResponse.onError : Consumer error (async listener): ' + exception.toString()
-            exception.printStackTrace()
-        }, { it ->
-            println "smokeClientCallBack Success httpResponse.onComplete >> Consumer completed"
-        })
-    }
 
 }
