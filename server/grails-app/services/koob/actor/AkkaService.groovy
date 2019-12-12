@@ -8,6 +8,7 @@ import akka.cluster.Cluster
 import akka.cluster.ClusterEvent
 import com.typesafe.config.ConfigFactory
 import grails.gorm.transactions.Transactional
+import koob.actor.christmas.ChristmasManager
 import koob.actor.device.SoundDetection
 import koob.actor.halloween.HalloweenManager
 import koob.actor.networking.ClusterListener
@@ -71,7 +72,7 @@ class AkkaService implements GlobalConfig {
         clusterListener = actorOf(ClusterListener, "ClusterListener")
 
         if (christmasEnabled){
-            christmasManger = actorOf(koob.actor.christmas.Manager, "ChristmasManger")
+            christmasManger = actorOf(ChristmasManager, "ChristmasManger")
         }
 
         if (halloweenEnabled){
@@ -141,7 +142,7 @@ class AkkaService implements GlobalConfig {
     void destroy() {
         system?.shutdown()
         system = null
-        log.error("destroying Akka ActorSystem: done.")
+        log.warning("destroying Akka ActorSystem: done.")
     }
 
 }

@@ -1,10 +1,13 @@
 package koob.networking
 
 import akka.actor.ActorRef
+import koob.actor.christmas.ChristmasManager
 import koob.actor.halloween.HalloweenManager
 import koob.command.video.Play
 import koob.command.video.PlayHologram
+import koob.config.GlobalConfig
 import koob.event.HologramPlaybackComplete
+import koob.event.HologramPlaybackStarted
 import koob.event.MediaPlaybackComplete
 import koob.event.MediaPlaybackStarted
 import koob.event.MotionDetected
@@ -12,6 +15,7 @@ import koob.event.PumpkinsPlaybackComplete
 import koob.event.PumpkinsPlaybackStarted
 import koob.event.SoundDetected
 import groovy.util.logging.Slf4j
+import koob.media.ChristmasVideo
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallback
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -20,7 +24,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import org.springframework.beans.factory.annotation.Value
 
 @Slf4j
-class MqttClientService implements MqttCallback {
+class MqttClientService implements MqttCallback, GlobalConfig {
 
     public MqttClient mqttClient
 
@@ -88,31 +92,33 @@ class MqttClientService implements MqttCallback {
             }
 
             else if (message instanceof HologramPlaybackComplete){
-                HalloweenManager.tellProjectorHolograms(message)
+                if (halloweenEnabled)
+                    HalloweenManager.tellProjectorHolograms(message)
+                if (christmasEnabled)
+                    ChristmasManager.tell(message)
+            }
+
+            else if (message instanceof HologramPlaybackStarted){
+                if (halloweenEnabled)
+                    HalloweenManager.tellProjectorHolograms(message)
+                if (christmasEnabled)
+                    ChristmasManager.tell(message)
             }
 
             else if (message instanceof PlayHologram) {
-                HalloweenManager.tellProjectorHolograms(Play.waiting())
-                HalloweenManager.tellProjectorHolograms(message)
+                if (halloweenEnabled){
+                    HalloweenManager.tellProjectorHolograms(Play.waiting())
+                    HalloweenManager.tellProjectorHolograms(message)
+                }
+                if (christmasEnabled)
+                    ChristmasManager.tell(message)
             }
 
-
-                /*
-
-            else if (message instanceof MediaPlaybackComplete) {
-                akkaService.homeManager?.tell(message, akkaService.actorNoSender())
-            }
-
-            else if (message instanceof MediaPlaybackStarted ) {
-                akkaService.homeManager?.tell(message, akkaService.actorNoSender())
-            }
-
+            /*
             else if (message instanceof MotionDetected ){
                 akkaService.homeManager?.tell(message, akkaService.actorNoSender())
             }
-
-                 */
-            // log.info "mqtt messageArrived >> topic:$topic | ${m.toString()}"
+            */
 
         } catch (e) {
             e?.printStackTrace()

@@ -27,8 +27,10 @@ class BootStrap implements GlobalConfig {
     }
 
     private void configureModels(){
-        HalloweenVideo.withNewSession { configureDataHalloween() }
-        // ChristmasVideo.withNewSession { configureDataChristmas() }
+        if (halloweenEnabled)
+            HalloweenVideo.withNewSession { configureDataHalloween() }
+        if (christmasEnabled)
+        ChristmasVideo.withNewSession { configureDataChristmas() }
     }
 
     private void configureDataHalloween(){
@@ -138,12 +140,15 @@ class BootStrap implements GlobalConfig {
     }
 
     private void configureDataChristmas(){
-
-        new ChristmasVideo(name: ChristmasVideo.Name.DECK_THE_HALLS).save(failOnError:true, flush:true)
-        new ChristmasVideo(name: ChristmasVideo.Name.GREAT_GIFT_WRAP).save(failOnError:true, flush:true)
-        new ChristmasVideo(name: ChristmasVideo.Name.MARCH_WOODEN_SOLDIER).save(failOnError:true, flush:true)
-        new ChristmasVideo(name: ChristmasVideo.Name.PACKING_SANTA_SLEIGH).save(failOnError:true, flush:true)
-        new ChristmasVideo(name: ChristmasVideo.Name.TOY_TINKERING).save(failOnError:true, flush:true)
-
+        ChristmasVideo.withNewTransaction {
+            new ChristmasVideo(id: 1, name: ChristmasVideo.Name.DECK_THE_HALLS).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 2, name: ChristmasVideo.Name.GREAT_GIFT_WRAP).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 3, name: ChristmasVideo.Name.MARCH_WOODEN_SOLDIER).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 4, name: ChristmasVideo.Name.PACKING_SANTA_SLEIGH).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 5, name: ChristmasVideo.Name.TOY_TINKERING).save(failOnError:true, flush:true)
+            // new ChristmasVideo(id: 6, name: ChristmasVideo.Name.YULETIDE).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 7, name: ChristmasVideo.Name.SNOWMAN_TREE).save(failOnError:true, flush:true)
+            new ChristmasVideo(id: 8, name: ChristmasVideo.Name.SNOWMAN_SKATE).save(failOnError:true, flush:true)
+        }
     }
 }

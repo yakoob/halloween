@@ -29,7 +29,7 @@ class Play extends Command implements CommandableMedia {
 
     @Override
     public String toString(){
-        return "${media.command} >> ${media.name}"
+        return "${media?.command} >> ${media?.name}"
     }
 
 }

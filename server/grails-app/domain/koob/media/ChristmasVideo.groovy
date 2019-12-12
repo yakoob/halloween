@@ -5,7 +5,7 @@ import koob.domain.utils.JsonSerializable
 
 class ChristmasVideo implements JsonSerializable, Media {
 
-    enum Name {DECK_THE_HALLS, GREAT_GIFT_WRAP, MARCH_WOODEN_SOLDIER, PACKING_SANTA_SLEIGH, TOY_TINKERING}
+    enum Name {DECK_THE_HALLS, GREAT_GIFT_WRAP, MARCH_WOODEN_SOLDIER, PACKING_SANTA_SLEIGH, TOY_TINKERING, YULETIDE, SNOWMAN_SKATE, SNOWMAN_TREE}
 
     Name name
     String command
@@ -25,5 +25,11 @@ class ChristmasVideo implements JsonSerializable, Media {
         name nullable: true
         command nullable: true
         event nullable: true
+    }
+
+    static ChristmasVideo getDeckTheHalls(){
+        withNewSession {
+            return ChristmasVideo.findByName(Name.DECK_THE_HALLS)
+        }
     }
 }

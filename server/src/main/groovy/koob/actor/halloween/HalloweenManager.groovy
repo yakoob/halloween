@@ -4,7 +4,6 @@ import akka.actor.ActorRef
 import akka.actor.Props
 import koob.actor.BaseActor
 import koob.config.GlobalConfig
-import grails.util.Holders
 import groovy.util.logging.Log
 
 @Log

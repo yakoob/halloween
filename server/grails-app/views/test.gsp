@@ -18,7 +18,9 @@
         </div>
 
         <div id="holograms" role="navigation">
+
             <h2>Available Holograms:</h2>
+            <g:link controller="test" action="mute">Mute</g:link> | <g:link controller="test" action="unMute">Un-Mute</g:link> | <g:link controller="test" action="shutdown">Shutdown</g:link>
             <ul>
                 <g:each var="hologram" in="${holograms}">
                     <li class="controller">

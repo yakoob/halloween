@@ -1,15 +1,20 @@
 package koob.actor.christmas
 
+import koob.command.device.Shutdown
 import akka.actor.ActorRef
 import akka.actor.Cancellable
+import grails.converters.JSON
 import koob.actor.BaseActor
 import koob.command.Command
 import koob.command.CommandableMedia
+import koob.command.video.Mute
 import koob.command.video.Pause
 import koob.command.video.Play
 import koob.command.video.Resume
-import koob.event.MediaPlaybackComplete
-import koob.event.MediaPlaybackStarted
+import koob.command.video.UnMute
+import koob.config.GlobalConfig
+import koob.event.HologramPlaybackComplete
+import koob.event.HologramPlaybackStarted
 import koob.event.MotionDetected
 import koob.fsm.FSM
 import koob.fsm.Guard
@@ -25,19 +30,18 @@ import scala.concurrent.duration.Duration
 import java.util.concurrent.TimeUnit
 
 @Slf4j
-class Projector extends BaseActor implements FSM {
+class ProjectorHologram extends BaseActor implements FSM, GlobalConfig {
 
     def jsonService = Holders.applicationContext.getBean("jsonService")
     def mqttClientService = Holders.applicationContext.getBean("mqttClientService")
 
-    ChristmasVideo currentVideo
-    ChristmasVideo previousVideo
-    ChristmasVideo idleVideo
+    ChristmasVideo currentVideo = ChristmasVideo.deckTheHalls
+    ChristmasVideo previousVideo = ChristmasVideo.deckTheHalls
 
     Cancellable randomVideoTimer
 
 
-    Projector(){
+    ProjectorHologram(){
 
         startStateMachine(Off)
 
@@ -55,23 +59,34 @@ class Projector extends BaseActor implements FSM {
             fsm.showState()
             log.info "currentVideo:${currentVideo?.name} | previousVideo: ${previousVideo?.name}"
 
+        } else if (message instanceof Mute ){
+
+            remoteDispatch(new Mute())
+
+        } else if (message instanceof UnMute ){
+
+            remoteDispatch(new UnMute())
+
+        } else if (message instanceof Shutdown ){
+
+            remoteDispatch(new Shutdown())
+
         } else if (message instanceof Command) {
 
             fsm.fire(message)
 
-        } else if (message instanceof MediaPlaybackComplete) {
+        } else if (message instanceof HologramPlaybackComplete) {
 
-            self.tell(new Play(media: idleVideo), ActorRef.noSender())
+            startRandomVideoTimer()
 
-        } else if (message instanceof MediaPlaybackStarted) {
+        } else if (message instanceof HologramPlaybackStarted) {
             if (message.media instanceof ChristmasVideo) {
                 this.currentVideo = message.media
             }
+            unmute()
         } else if (message instanceof MotionDetected){
-
             randomVideoTimer?.cancel()
             startRandomVideoTimer()
-
         }
 
     }
@@ -103,13 +118,32 @@ class Projector extends BaseActor implements FSM {
 
         if (command instanceof CommandableMedia) {
 
+            println command.dump()
+
             this.previousVideo = this.currentVideo
             this.currentVideo = command?.media
 
-            if (currentVideo?.jsonTemplatePath) {
-                // send to mqtt so android can process
+            if (command instanceof Mute) {
                 mqttClientService.publish(
-                        "christmas/video",
+                        "christmas/projector/hologram",
+                        (['command':'Mute'] as JSON).toString(false)
+                )
+            }
+            else if (command instanceof UnMute) {
+                mqttClientService.publish(
+                        "christmas/projector/hologram",
+                        (['command':'UnMute'] as JSON).toString(false)
+                )
+            }
+            else if (command instanceof Shutdown) {
+                mqttClientService.publish(
+                        "christmas/projector/hologram",
+                        (['command':'Shutdown'] as JSON).toString(false)
+                )
+            }
+            else if (currentVideo?.jsonTemplatePath) {
+                mqttClientService.publish(
+                        "christmas/projector/hologram",
                         jsonService.toJsonFromDomainTemplate(currentVideo)
                 )
             }
@@ -117,9 +151,37 @@ class Projector extends BaseActor implements FSM {
 
     }
 
+    private void unmute(){
+
+        context.system().scheduler().scheduleOnce(Duration.create(5, TimeUnit.SECONDS),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        println 'unmute'
+                        ChristmasManager.tell(new UnMute())
+                    }
+                }, context.system().dispatcher()
+        )
+    }
+
+    private void mute(){
+
+        context.system().scheduler().scheduleOnce(Duration.create(5, TimeUnit.SECONDS),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        println 'mute'
+                        ChristmasManager.tell(new Mute())
+                    }
+                }, context.system().dispatcher()
+        )
+    }
+
     private void startRandomVideoTimer(){
 
-        randomVideoTimer = context.system().scheduler().schedule(Duration.Zero(), Duration.create(3, TimeUnit.MINUTES),
+        randomVideoTimer?.cancel()
+
+        randomVideoTimer = context.system().scheduler().scheduleOnce(Duration.create(5, TimeUnit.SECONDS),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -136,7 +198,7 @@ class Projector extends BaseActor implements FSM {
 
                                 if(videos?.size()){
 
-                                    videos.removeAll([previousVideo])
+                                    videos.remove([previousVideo])
 
                                     Collections.shuffle(videos)
 

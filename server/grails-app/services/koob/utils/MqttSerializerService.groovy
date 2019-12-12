@@ -84,53 +84,36 @@ class MqttSerializerService {
                 return res
             }
 
-
-
         }
 
-        /*
-        if (topic.contains("ActorSystem/Halloween/Projector")){
+        if (topic.contains("christmas/actor/hologram")){
 
             json = JSON.parse(message)
             Gson gson = new Gson()
+            def res
 
-            if (json.command == "songComplete"){
+            ChristmasVideo _media = gson.fromJson(message, ChristmasVideo.class)
 
-                def complete
-                if (json.next)
-                    complete = new MediaPlaybackComplete(topic: topic, next:true)
-                else
-                    complete = new MediaPlaybackComplete(topic: topic, next:false)
-                return complete
+            if (json.command == "playbackComplete"){
+                return new HologramPlaybackComplete()
             }
 
             if (json.event == "playbackStarted"){
-                return new MediaPlaybackStarted(media:new Gson().fromJson(message, HalloweenVideo.class), topic: topic)
+                res = new HologramPlaybackStarted(topic: topic, media: _media)
+                return res
             }
-        }
 
-         */
-
-
-        if (topic.contains("ActorSystem/Christmas/Projector")){
+        } else if (topic.contains("christmas/actor")){
 
             json = JSON.parse(message)
-            Gson gson = new Gson()
 
-            if (json.command == "songComplete"){
+            /*
+            if (json.lights == "relaxed"){
                 return new MediaPlaybackComplete()
             }
-
-            if (json.event == "playbackStarted"){
-                return new MediaPlaybackStarted(media:new Gson().fromJson(message, ChristmasVideo.class))
-            }
+             */
         }
 
-        if (topic.contains("ActorSystem/Christmas/Projector/Event")){
-            log.debug "!!! todo: !!!! implement christmas projector events"
-            log.debug message
-            return
-        }
     }
 
 }
